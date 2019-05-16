@@ -19,6 +19,7 @@ class FoodBox extends React.Component {
 
     addedItemsToAppJSState = () =>{
         this.props.updateFoodList(this.state)
+
     }
 
 
@@ -45,7 +46,7 @@ class FoodBox extends React.Component {
                 <input className="input" type="number" onChange={this.updateItems} /> 
               </div>
               <div className="control">
-                <button onClick={this.addItemsToTheListInAppJS}className="button is-info" >+</button>
+                <button onClick={this.addedItemsToAppJSState}className="button is-info" >+</button>
               </div>
             </div>
           </div>

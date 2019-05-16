@@ -6,7 +6,7 @@ import "bulma/css/bulma.css";
 import FoodBox from "./FoodBox";
 import Form from "./Form"
 import Search from "./Search"
-import Addfood from "./Addfood"
+// import Addfood from "./Addfood"
 
 class App extends Component {
   state = {
@@ -20,6 +20,8 @@ class App extends Component {
     }
     
   };
+
+  
 
   addAFoodItem = (e) => {
     e.preventDefault()
@@ -78,14 +80,27 @@ class App extends Component {
     
   }
 
-  addItemsToAppJSState = (food) =>{
-    // this.setState(addedFood);
-  }
 
-  updateFoodList = (food) =>{
-    let foodListCopy = { ... this.state.food}
+  updateFoodList = (food) => {
+    console.log(food)
+    let foodListCopy = { ...this.state.foodList }
+    //foodListCopy['hello'] = 'world '+Date.now()
     foodListCopy[ food.name ] = food
-    this.setState({foodList: foodListCopy})
+    //foodListCopy [ Pizza ] = { quantity: 5, calories: 2000, name: Pizza }
+    this.setState({ foodList:foodListCopy })
+  }
+  
+  showFoodList = () => {
+    let foodListCopy = { ... this.state.foodList }
+    return Object.keys(foodListCopy).map(function(key) {
+      return <li value={key}>
+              <span >{foodListCopy[key].name} | </span>
+              <span >{foodListCopy[key].calories}| </span>
+              <span >{foodListCopy[key].quantity}  </span>
+            </li>
+            
+    });
+
   }
 
   
@@ -98,6 +113,7 @@ class App extends Component {
         <FoodBox key={i} image={food.image} name={food.name} calories={food.calories} 
         addFood={this.addFood} updateFoodList={ this.updateFoodList }/>
         
+        
       );
     });
 
@@ -107,7 +123,10 @@ class App extends Component {
       <Form addAFoodItem={this.addAFoodItem} setItems={this.setItems} setCalories={this.setCalories} setImages={this.setImages}/>
         <h1>Item list</h1>
         {fooditems}
-        <Addfood/>
+        <div>
+        {this.showFoodList()}
+        </div>
+        {/* <Addfood/> */}
         
       </div>
     );
